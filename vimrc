@@ -20,6 +20,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'carakan/new-railscasts-theme'
 Plugin 'shmup/vim-sql-syntax'
+Plugin 'vim-scripts/Conque-Shell'
 call vundle#end()
 colorscheme new-railscasts
 filetype plugin indent on
