@@ -10,7 +10,6 @@ set hidden
 imap kj <esc>
 nnoremap <Space> i_<Esc>r
 set number
-set scrolloff=20
 syntax on
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
