@@ -18,3 +18,7 @@ then
   alias vim="exit"
 fi
 
+open() {
+  cd $(find $SOURCE -name "$1" -type d)
+}
+
