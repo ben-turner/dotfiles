@@ -3,7 +3,7 @@ export SOURCE=$PROJECTS/src
 export GO2MOBI=$SOURCE/github.com/go2mobi/
 export GOPATH=$PROJECTS
 export GOROOT=/usr/local/go
-export PATH=$PATH:$GOPATH/bin:$GOROOT/bin:$HOME/dotfiles/scripts
+export PATH=$PATH:$GOPATH/bin:$GOROOT/bin:$SOURCE/github.com/ben-turner/dotfiles/scripts
 
 function nonzero_return() {
 	RETVAL=$?
