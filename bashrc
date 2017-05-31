@@ -33,3 +33,5 @@ open() {
   cd "$options"
 }
 
+alias pac="sudo pacman -S"
+
