@@ -21,8 +21,7 @@ fi
 open() {
   mapfile -t options < <(find $SOURCE -name "$1" -type d)
 
-  # if [[ ${#options[@]} -gt 1 ]];
-  if true
+  if [[ ${#options[@]} -gt 1 ]];
   then
     echo "Multiple matches found. Choose one:"
     select opt in "${options[@]}";
