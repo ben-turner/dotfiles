@@ -14,6 +14,7 @@ syntax on
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
 Plugin 'fatih/vim-go'
 Plugin 'scrooloose/nerdtree'
 Plugin 'airblade/vim-gitgutter'
@@ -22,10 +23,15 @@ Plugin 'shmup/vim-sql-syntax'
 Plugin 'vim-scripts/Conque-Shell'
 Plugin 'othree/yajs.vim'
 Plugin 'othree/es.next.syntax.vim'
+Plugin 'tpope/vim-surround'
+Plugin 'easymotion/vim-easymotion'
+Plugin 'ntpeters/vim-better-whitespace'
+Plugin 'valloric/youcompleteme'
+Plugin 'terryma/vim-multiple-cursors'
 call vundle#end()
 colorscheme new-railscasts
 filetype plugin indent on
-map <C-n> :NERDTreeToggle<CR>
+map <leader>n :NERDTreeToggle<CR>
 
 func! Shebang(path)
         echo a:path
