@@ -46,6 +46,9 @@ noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
 
+nnoremap <C-k> O<Esc>
+nnoremap <C-j> o<Esc>
+
 nnoremap <C-h> :bp<Enter>
 nnoremap <C-l> :bn<Enter>
 function! s:closeAndNext()
