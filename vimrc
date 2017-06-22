@@ -46,8 +46,8 @@ noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
 
-nnoremap <C-k> O<Esc>
-nnoremap <C-j> o<Esc>
+nnoremap <C-k> O<Esc>0D
+nnoremap <C-j> o<Esc>0D
 
 nnoremap <C-h> :bp<Enter>
 nnoremap <C-l> :bn<Enter>
