@@ -16,6 +16,7 @@ Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'valloric/youcompleteme'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-dispatch'
 call vundle#end()
 
 " Settings
@@ -39,8 +40,7 @@ colorscheme new-railscasts
 noremap <leader>n :NERDTreeToggle<CR>
 
 " Normal
-nnoremap <Space> li_<Esc>r
-nnoremap <S-Space> i_<Esc>r
+nnoremap <Space> i_<Esc>r
 nnoremap <C-k> O<Esc>0D
 nnoremap <C-j> o<Esc>0D
 nnoremap <C-h> <Esc>:bp<Enter>
@@ -52,14 +52,14 @@ nnoremap <leader>gd :Gdiff<cr>
 nnoremap <leader>gs :Gstatus<cr>
 nnoremap <leader>gbr :Git branch<space>
 nnoremap <leader>gco :Git checkout<space>
-nnoremap <leader>gpush :Gpush<cr>
-nnoremap <leader>gpull :Gpull<cr>
+nnoremap <leader>gp :Gpush<cr>
+nnoremap <leader>gl :Gpull<cr>
 
 " Visual
-vnoremap kj <Esc>
+vnoremap jh <Esc>
 
 " Insert
-inoremap kj <Esc>
+inoremap jh <Esc>
 
 " Functions
 function! s:s3edit(file)
