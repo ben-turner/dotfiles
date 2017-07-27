@@ -55,12 +55,6 @@ nnoremap <leader>gco :Git checkout<space>
 nnoremap <leader>gp :Gpush<cr>
 nnoremap <leader>gl :Gpull<cr>
 
-" Visual
-vnoremap jh <Esc>
-
-" Insert
-inoremap jh <Esc>
-
 " Functions
 function! s:s3edit(file)
     let file = substitute(a:file, '^s3://', '\1', '')
