@@ -36,4 +36,5 @@ open() {
 }
 
 alias pac="sudo pacman -S"
+alias grep="grep --color"
 
