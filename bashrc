@@ -35,6 +35,10 @@ open() {
   cd "$options"
 }
 
+edit() {
+  open $1 && vim
+}
+
 alias pac="sudo pacman -S"
 alias grep="grep --color"
 
