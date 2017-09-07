@@ -17,9 +17,13 @@ Plugin 'valloric/youcompleteme'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-dispatch'
+Plugin 'chr4/nginx.vim'
+Plugin 'pangloss/vim-javascript'
+Plugin 'takac/vim-hardtime'
 call vundle#end()
 
 " Settings
+set relativenumber
 set wildmenu
 set wildmode=list:longest
 set backspace=2
@@ -54,6 +58,9 @@ nnoremap <leader>gbr :Git branch<space>
 nnoremap <leader>gco :Git checkout<space>
 nnoremap <leader>gp :Gpush<cr>
 nnoremap <leader>gl :Gpull<cr>
+nnoremap <leader>r :set invrelativenumber<cr>
+nnoremap <leader>l :set invlist<cr>
+nnoremap <leader>h :HardTimeToggle<cr>
 
 " Functions
 function! s:s3edit(file)
