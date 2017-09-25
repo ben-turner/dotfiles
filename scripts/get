@@ -1,4 +1,4 @@
-# !/bin/bash
+#!/bin/bash
 
 mkdir -p "$SOURCE/$(dirname $1)"
 cd "$SOURCE/$(dirname $1)"

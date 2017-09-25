@@ -2,4 +2,5 @@
 [._]*.sw[a-p]
 [._]s[a-v][a-z]
 [._]sw[a-p]
+.tern-project
 

@@ -10,7 +10,7 @@ function nonzero_return() {
 	[ $RETVAL -ne 0 ] && echo "[$RETVAL]"
 }
 
-export PS1="\[\e[31m\]\`nonzero_return\`\[\e[m\] \[\e[32m\]\u\[\e[m\]\[\e[32m\]@\[\e[m\]\[\e[32m\]\h\[\e[m\] [\W]: "
+source $PROJECTS/src/github.com/ben-turner/dotfiles/prompt.sh
 
 if [ $VIM ]
 then
@@ -18,8 +18,18 @@ then
   alias vim="exit"
 fi
 
+title() {
+  export PROMPT_COMMAND_BAK=$PROMPT_COMMAND
+  export PROMPT_COMMAND=''
+  echo -ne "\033]0;$1\007"
+}
+
+restitle() {
+  export PROMPT_COMMAND=$PROMPT_COMMAND_BAK
+}
+
 open() {
-  mapfile -t options < <(find $SOURCE -name "$1" -type d)
+  mapfile -t options < <(find $SOURCE -name "*$1*" -type d)
 
   if [[ ${#options[@]} -gt 1 ]]
   then
@@ -32,7 +42,7 @@ open() {
   else
     options=${options[0]}
   fi
-  cd "$options"
+  cd "$options" && title $(basename "$options")
 }
 
 edit() {

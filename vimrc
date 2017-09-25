@@ -7,7 +7,6 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'carakan/new-railscasts-theme'
 Plugin 'shmup/vim-sql-syntax'
-Plugin 'vim-scripts/Conque-Shell'
 Plugin 'othree/yajs.vim'
 Plugin 'othree/es.next.syntax.vim'
 Plugin 'tpope/vim-surround'
@@ -20,9 +19,17 @@ Plugin 'tpope/vim-dispatch'
 Plugin 'chr4/nginx.vim'
 Plugin 'pangloss/vim-javascript'
 Plugin 'takac/vim-hardtime'
+Plugin 'bkad/CamelCaseMotion'
+Plugin 'elmindreda/vimcolors'
+Plugin 'sickill/vim-monokai'
+Plugin 'vim-airline/vim-airline'
+Plugin 'edkolev/promptline.vim'
 call vundle#end()
+call camelcasemotion#CreateMotionMappings('<leader>')
 
 " Settings
+set title
+set laststatus=2
 set relativenumber
 set wildmenu
 set wildmode=list:longest
@@ -38,7 +45,14 @@ set guicursor=
 syntax on
 filetype off
 filetype plugin indent on
-colorscheme new-railscasts
+colorscheme monokai
+
+" Lettings
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts=1
+let NERDTreeShowLineNumbers=1
+let g:hardtime_default_on=1
+let g:hardtime_maxcount=2
 
 " Mappings
 " Global
