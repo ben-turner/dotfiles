@@ -34,6 +34,7 @@ set shiftwidth=2
 set tabstop=2
 set hidden
 set number
+set guicursor=
 syntax on
 filetype off
 filetype plugin indent on
