@@ -24,6 +24,7 @@ Plugin 'elmindreda/vimcolors'
 Plugin 'sickill/vim-monokai'
 Plugin 'vim-airline/vim-airline'
 Plugin 'edkolev/promptline.vim'
+Plugin 'tpope/vim-rhubarb'
 call vundle#end()
 call camelcasemotion#CreateMotionMappings('<leader>')
 
@@ -51,12 +52,10 @@ colorscheme monokai
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts=1
 let NERDTreeShowLineNumbers=1
+let NERDTreeQuitOnOpen=1
+let NERDTreeAutoDeleteBuffer=1
 let g:hardtime_default_on=1
 let g:hardtime_maxcount=2
-
-" Mappings
-" Global
-noremap <leader>n :NERDTreeToggle<CR>
 
 " Normal
 nnoremap <Space> i_<Esc>r
@@ -73,9 +72,15 @@ nnoremap <leader>gbr :Git branch<space>
 nnoremap <leader>gco :Git checkout<space>
 nnoremap <leader>gp :Gpush<cr>
 nnoremap <leader>gl :Gpull<cr>
-nnoremap <leader>r :set invrelativenumber<cr>
-nnoremap <leader>l :set invlist<cr>
+nnoremap <leader>gh :Gbrowse<cr>
 nnoremap <leader>h :HardTimeToggle<cr>
+nnoremap <leader>n :NERDTreeToggle<CR>
+nnoremap <leader>f :NERDTreeFind<CR>
+nnoremap <leader>t :belowright new<CR>:te<space>
+nnoremap <leader>r :belowright new<CR>:te npm run dev<cr>
+
+" Terminal
+tnoremap <Esc> <C-\><C-n>
 
 " Functions
 function! s:s3edit(file)

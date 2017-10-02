@@ -46,9 +46,12 @@ open() {
 }
 
 edit() {
-  open $1 && vim
+  open $1 && nvim
 }
 
 alias pac="sudo pacman -S"
 alias grep="grep --color"
+alias vim="nvim"
+alias vi="nvim"
+alias v="nvim"
 
