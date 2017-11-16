@@ -4,6 +4,7 @@ export GO2MOBI=$SOURCE/github.com/go2mobi/
 export GOPATH=$PROJECTS
 export GOROOT=/usr/local/go
 export PATH=$PATH:$GOPATH/bin:$GOROOT/bin:$SOURCE/github.com/ben-turner/dotfiles/scripts
+export EDITOR=/usr/bin/nvim
 
 function nonzero_return() {
 	RETVAL=$?

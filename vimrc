@@ -25,6 +25,7 @@ Plugin 'sickill/vim-monokai'
 Plugin 'vim-airline/vim-airline'
 Plugin 'edkolev/promptline.vim'
 Plugin 'tpope/vim-rhubarb'
+Plugin 'christianrondeau/vim-base64'
 call vundle#end()
 call camelcasemotion#CreateMotionMappings('<leader>')
 
@@ -74,13 +75,18 @@ nnoremap <leader>gp :Gpush<cr>
 nnoremap <leader>gl :Gpull<cr>
 nnoremap <leader>gh :Gbrowse<cr>
 nnoremap <leader>h :HardTimeToggle<cr>
-nnoremap <leader>n :NERDTreeToggle<CR>
-nnoremap <leader>f :NERDTreeFind<CR>
-nnoremap <leader>t :belowright new<CR>:te<space>
-nnoremap <leader>r :belowright new<CR>:te npm run dev<cr>
+nnoremap <leader>n :NERDTreeToggle<cr>
+nnoremap <leader>f :NERDTreeFind<cr>
+nnoremap <leader>t :belowright new<cr>:te<cr>
+nnoremap <leader>T :tab new<cr>:te<cr>
+nnoremap <leader>s :tab new<cr>:te ssh<space>
+nnoremap <leader>r :belowright new<cr>:te npm run dev<cr>
+nnoremap <leader>v :tabedit ~/Projects/src/github.com/ben-turner/dotfiles/vimrc<cr>
+nnoremap gn :tabe<cr>
 
 " Terminal
 tnoremap <Esc> <C-\><C-n>
+tnoremap <C-w> <C-\><C-n><C-w>
 
 " Functions
 function! s:s3edit(file)
@@ -92,6 +98,11 @@ function! s:s3edit(file)
     execute "au BufWritePost <buffer=" . buf . "> silent! !aws s3 cp '" . tempFile . "' 's3://" . file . "'"
     execute "au BufLeave <buffer=" . buf . "> silent! !rm " . tempFile
 endfunction
-au FileReadCmd s3://* call s:s3edit(expand("<amatch>"))
-au BufReadCmd s3://* call s:s3edit(expand("<amatch>"))
+
+aug vimrc
+  au!
+  au FileReadCmd,BufReadCmd s3://* call s:s3edit(expand("<amatch>"))
+  au FileType vim au FileWritePost,BufWritePost <buffer> source %
+  au FileReadCmd *.vue set syntax=html
+aug END
 
