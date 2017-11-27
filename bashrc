@@ -50,6 +50,14 @@ edit() {
   open $1 && nvim
 }
 
+ssh() {
+  if [[ "$(ssh-add -l)" = "The agent has no identities." ]]; then
+    mount /dev/disk/by-uuid/9c0da0a8-8777-4c20-b668-f3e851a251fa /keys
+    /keys/load.sh
+  fi
+  /usr/bin/ssh "$@";
+}
+
 alias pac="sudo pacman -S"
 alias grep="grep --color"
 alias vim="nvim"
