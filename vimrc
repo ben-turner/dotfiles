@@ -26,6 +26,7 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'edkolev/promptline.vim'
 Plugin 'tpope/vim-rhubarb'
 Plugin 'christianrondeau/vim-base64'
+Plugin 'posva/vim-vue'
 call vundle#end()
 call camelcasemotion#CreateMotionMappings('<leader>')
 
@@ -83,6 +84,7 @@ nnoremap <leader>s :tab new<cr>:te ssh<space>
 nnoremap <leader>r :belowright new<cr>:te npm run dev<cr>
 nnoremap <leader>v :tabedit ~/Projects/src/github.com/ben-turner/dotfiles/vimrc<cr>
 nnoremap gn :tabe<cr>
+nnoremap <leader>N :set invrelativenumber<cr>
 
 " Terminal
 tnoremap <Esc> <C-\><C-n>
