@@ -6,32 +6,21 @@ export GOROOT=/usr/local/go
 export PATH=$PATH:$GOPATH/bin:$GOROOT/bin:$SOURCE/github.com/ben-turner/dotfiles/scripts
 export EDITOR=/usr/bin/nvim
 
-function nonzero_return() {
-	RETVAL=$?
-	[ $RETVAL -ne 0 ] && echo "[$RETVAL]"
+function _update_ps1() {
+  PS1="$(powerline-shell $?)"
 }
-
-source $PROJECTS/src/github.com/ben-turner/dotfiles/prompt.sh
-
-if [ $VIM ]
-then
-  export PS1="\[\e[31m\][vim]\[\e[m\]"$PS1
-  alias vim="exit"
+if [ "$TERM" != "linux" ]; then
+  PROMPT_COMMAND="_update_ps1;"
 fi
 
-title() {
-  export PROMPT_COMMAND_BAK=$PROMPT_COMMAND
-  export PROMPT_COMMAND=''
-  echo -ne "\033]0;$1\007"
-}
-
-restitle() {
-  export PROMPT_COMMAND=$PROMPT_COMMAND_BAK
-}
-
 open() {
-  mapfile -t options < <(find $SOURCE -name "*$1*" -type d)
+  mapfile -t options < <(find $SOURCE -not -path '*/\.+' -name "*$1*" -type d | awk '{ print length, $0 }' | sort -n -s | cut -d" " -f2-)
 
+  if [[ ${#options[@]} -eq 0 ]]
+  then
+    echo "No matches found"
+    return 1
+  fi
   if [[ ${#options[@]} -gt 1 ]]
   then
     echo "Multiple matches found. Choose one:"
@@ -43,7 +32,7 @@ open() {
   else
     options=${options[0]}
   fi
-  cd "$options" && title $(basename "$options")
+  cd "$options"
 }
 
 edit() {
@@ -52,10 +41,45 @@ edit() {
 
 ssh() {
   if [[ "$(ssh-add -l)" = "The agent has no identities." ]]; then
-    mount /dev/disk/by-uuid/9c0da0a8-8777-4c20-b668-f3e851a251fa /keys
+    sudo mount /dev/disk/by-uuid/9c0da0a8-8777-4c20-b668-f3e851a251fa /keys
     /keys/load.sh
   fi
   /usr/bin/ssh "$@";
+}
+
+keys() {
+  sudo mount /dev/disk/by-uuid/9c0da0a8-8777-4c20-b668-f3e851a251fa /keys
+  /keys/load.sh
+}
+
+dbtunnel() {
+  ssh -f -N -L3306:g3.cybe5vwfyrgh.us-east-1.rds.amazonaws.com:3306 admin@a.g3admin.com
+}
+db() {
+  connection="/tmp/mysocket$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 5 | head -n 1)"
+  control="/tmp/mysocket$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 5 | head -n 1)"
+  while [[ -f "${connection}" || -f "${control}" ]]; do
+    connection="/tmp/mysocket$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 5 | head -n 1)"
+    control="/tmp/mysocket$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 5 | head -n 1)"
+  done;
+  ssh -M -S "${control}" -fnNT -L "${connection}:g3.cybe5vwfyrgh.us-east-1.rds.amazonaws.com:3306" admin@a.g3admin.com
+  mysql -S "${connection}" -p -u g3user
+  ssh -S "${control}" -O exit admin@a.g3admin.com
+  rm -f "${connection}" "${control}"
+}
+
+netfix() {
+  sudo ip link set enp0s31f6 down
+  sudo ip link set wlp1s0 down
+  echo "Disabled network devices"
+  sleep 10
+  echo "Re-enabling network devices"
+  sudo ip link set enp0s31f6 up
+}
+
+netstat() {
+  echo "Use ss instead"
+  return 127;
 }
 
 alias pac="sudo pacman -S"
@@ -63,4 +87,5 @@ alias grep="grep --color"
 alias vim="nvim"
 alias vi="nvim"
 alias v="nvim"
+alias a='setxkbmap -variant turner us'
 

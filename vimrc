@@ -78,8 +78,8 @@ nnoremap <leader>gh :Gbrowse<cr>
 nnoremap <leader>h :HardTimeToggle<cr>
 nnoremap <leader>n :NERDTreeToggle<cr>
 nnoremap <leader>f :NERDTreeFind<cr>
-nnoremap <leader>t :belowright new<cr>:te<cr>
-nnoremap <leader>T :tab new<cr>:te<cr>
+nnoremap <leader>t :belowright new<cr>:te<cr>a
+nnoremap <leader>T :tab new<cr>:te<cr>a
 nnoremap <leader>s :tab new<cr>:te ssh<space>
 nnoremap <leader>r :belowright new<cr>:te npm run dev<cr>
 nnoremap <leader>v :tabedit ~/Projects/src/github.com/ben-turner/dotfiles/vimrc<cr>
