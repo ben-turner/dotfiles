@@ -1,0 +1,13 @@
+{
+  "segments": [
+    "username",
+    "time",
+    "cwd",
+    "git",
+    "exit_code"
+  ],
+  "cwd": {
+    "mode": "dironly"
+  },
+  "theme": "default"
+}
