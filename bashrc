@@ -41,14 +41,14 @@ edit() {
 
 ssh() {
   if [[ "$(ssh-add -l)" = "The agent has no identities." ]]; then
-    sudo mount /dev/disk/by-uuid/9c0da0a8-8777-4c20-b668-f3e851a251fa /keys
+    sudo mount /dev/disk/by-uuid/bef6b086-527f-46fd-88c1-7a252f751904 /keys
     /keys/load.sh
   fi
   /usr/bin/ssh "$@";
 }
 
 keys() {
-  sudo mount /dev/disk/by-uuid/9c0da0a8-8777-4c20-b668-f3e851a251fa /keys
+  sudo mount /dev/disk/by-uuid/bef6b086-527f-46fd-88c1-7a252f751904 /keys
   /keys/load.sh
 }
 
