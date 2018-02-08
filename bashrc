@@ -82,6 +82,10 @@ netstat() {
   return 127;
 }
 
+rfc() {
+  curl -s https://www.rfc-editor.org/rfc/rfc$1.txt | less
+}
+
 alias pac="sudo pacman -S"
 alias grep="grep --color"
 alias vim="nvim"
