@@ -27,6 +27,7 @@ Plugin 'edkolev/promptline.vim'
 Plugin 'tpope/vim-rhubarb'
 Plugin 'christianrondeau/vim-base64'
 Plugin 'posva/vim-vue'
+Plugin 'qpkorr/vim-bufkill'
 call vundle#end()
 call camelcasemotion#CreateMotionMappings('<leader>')
 
@@ -61,10 +62,15 @@ let g:hardtime_maxcount=2
 
 " Normal
 nnoremap <Space> i_<Esc>r
-nnoremap <C-k> O<Esc>0D
-nnoremap <C-j> o<Esc>0D
+nnoremap J o<Esc>
+nnoremap K O<Esc>
+nnoremap H i_<Esc>r
+nnoremap L a_<Esc>r
+nnoremap <C-k> gt
+nnoremap <C-j> gT
 nnoremap <C-h> <Esc>:bp<Enter>
 nnoremap <C-l> <Esc>:bn<Enter>
+nnoremap <leader>bd :BD<cr>
 nnoremap <leader>ga :Gwrite<cr>
 nnoremap <leader>gc :Gcommit -v -q<cr>
 nnoremap <leader>gb :Gblame<cr>
