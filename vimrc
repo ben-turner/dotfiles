@@ -28,6 +28,8 @@ Plugin 'tpope/vim-rhubarb'
 Plugin 'christianrondeau/vim-base64'
 Plugin 'posva/vim-vue'
 Plugin 'qpkorr/vim-bufkill'
+Plugin 'w0rp/ale'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
 call vundle#end()
 call camelcasemotion#CreateMotionMappings('<leader>')
 
@@ -42,12 +44,11 @@ set showmode
 set nocompatible
 set expandtab
 set shiftwidth=2
-set tabstop=2
+set softtabstop=2
 set hidden
 set number
 set guicursor=
 syntax on
-filetype off
 filetype plugin indent on
 colorscheme monokai
 
@@ -59,9 +60,15 @@ let NERDTreeQuitOnOpen=1
 let NERDTreeAutoDeleteBuffer=1
 let g:hardtime_default_on=1
 let g:hardtime_maxcount=2
+let g:ale_sign_error='>'
+let g:ale_fixers= {
+\  'javascript': ['eslint'],
+\}
+let g:ale_fix_on_save=1
 
 " Normal
 nnoremap <Space> i_<Esc>r
+nnoremap <leader>j J
 nnoremap J o<Esc>
 nnoremap K O<Esc>
 nnoremap H i_<Esc>r
@@ -91,6 +98,7 @@ nnoremap <leader>r :belowright new<cr>:te npm run dev<cr>
 nnoremap <leader>v :tabedit ~/Projects/src/github.com/ben-turner/dotfiles/vimrc<cr>
 nnoremap gn :tabe<cr>
 nnoremap <leader>N :set invrelativenumber<cr>
+nnoremap <leader>zz :let &scrolloff=999-&scrolloff<CR>
 
 " Terminal
 tnoremap <Esc> <C-\><C-n>
@@ -107,10 +115,17 @@ function! s:s3edit(file)
     execute "au BufLeave <buffer=" . buf . "> silent! !rm " . tempFile
 endfunction
 
+function! s:terraformFMT()
+  let save_pos = getpos(".")
+  silent %!terraform fmt -
+  call setpos('.', save_pos)
+endfunction
+
 aug vimrc
   au!
   au FileReadCmd,BufReadCmd s3://* call s:s3edit(expand("<amatch>"))
   au FileType vim au FileWritePost,BufWritePost <buffer> source %
   au FileReadCmd *.vue set syntax=html
+  au BufWritePre *.tf call s:terraformFMT()
 aug END
 
