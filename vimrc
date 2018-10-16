@@ -45,12 +45,13 @@ set nocompatible
 set expandtab
 set shiftwidth=2
 set softtabstop=2
+set tabstop=2
 set hidden
 set number
 set guicursor=
 syntax on
 filetype plugin indent on
-colorscheme monokai
+colorscheme default
 
 " Lettings
 let g:airline#extensions#tabline#enabled = 1
@@ -69,10 +70,6 @@ let g:ale_fix_on_save=1
 " Normal
 nnoremap <Space> i_<Esc>r
 nnoremap <leader>j J
-nnoremap J o<Esc>
-nnoremap K O<Esc>
-nnoremap H i_<Esc>r
-nnoremap L a_<Esc>r
 nnoremap <C-k> gt
 nnoremap <C-j> gT
 nnoremap <C-h> <Esc>:bp<Enter>
@@ -105,6 +102,7 @@ tnoremap <Esc> <C-\><C-n>
 tnoremap <C-w> <C-\><C-n><C-w>
 
 " Functions
+command! W w
 function! s:s3edit(file)
     let file = substitute(a:file, '^s3://', '\1', '')
     let tempFile = substitute(system('mktemp'), '\n$', '\1', '')
@@ -129,3 +127,7 @@ aug vimrc
   au BufWritePre *.tf call s:terraformFMT()
 aug END
 
+" Filetype settings
+au FileType go ab fn func
+au FileType javascript ab fn function
+au FileType yaml set expandtab
