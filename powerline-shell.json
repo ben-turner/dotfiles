@@ -1,7 +1,6 @@
 {
   "segments": [
     "username",
-    "time",
     "cwd",
     "git",
     "exit_code"
