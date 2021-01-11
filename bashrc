@@ -1,13 +1,7 @@
 export PROJECTS=$HOME/Projects/
 export SOURCE=$PROJECTS/src
-export GO2MOBI=$SOURCE/github.com/go2mobi/
-export GOPATH=$PROJECTS
-export GOROOT=/usr/local/go1.9.3
-export PATH=$PATH:$GOPATH/bin:$GOROOT/bin:$SOURCE/github.com/ben-turner/dotfiles/scripts:$HOME/.node_modules/bin/:/home/ben/.gem/ruby/2.5.0/bin
+export PATH=$PATH:$SOURCE/github.com/ben-turner/dotfiles/scripts
 export EDITOR=/usr/bin/nvim
-if [ "${TERM}" = "xterm-kitty" ]; then
-  export TERM="xterm"
-fi
 
 unset SSH_AGENT_PID
 if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
@@ -52,19 +46,6 @@ new() {
   cd $SOURCE/$1
 }
 
-db() {
-  connection="/tmp/mysocket$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 5 | head -n 1)"
-  control="/tmp/mysocket$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 5 | head -n 1)"
-  while [[ -f "${connection}" || -f "${control}" ]]; do
-    connection="/tmp/mysocket$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 5 | head -n 1)"
-    control="/tmp/mysocket$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 5 | head -n 1)"
-  done;
-  ssh -M -S "${control}" -fnNT -L "${connection}:${1}.cybe5vwfyrgh.us-east-1.rds.amazonaws.com:3306" go2mobi@a.g3admin.com
-  mysql -S "${connection}" -p -u ${2}
-  ssh -S "${control}" -O exit go2mobi@a.g3admin.com
-  rm -f "${connection}" "${control}"
-}
-
 netfix() {
   sudo ip link set enp0s31f6 down
   sudo ip link set wlp1s0 down
@@ -83,21 +64,10 @@ rfc() {
   curl -s https://www.rfc-editor.org/rfc/rfc$1.txt | less
 }
 
-alias pac='sudo pacman -S'
 alias grep='grep --color'
 alias vim='nvim'
 alias vi='nvim'
 alias v='nvim'
-alias a='setxkbmap -variant turner us'
-alias serve='python -m http.server'
-alias keks='KUBECONFIG=~/.kube/eks kubectl'
-
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/ben/google-cloud-sdk/path.bash.inc' ]; then source '/home/ben/google-cloud-sdk/path.bash.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/home/ben/google-cloud-sdk/completion.bash.inc' ]; then source '/home/ben/google-cloud-sdk/completion.bash.inc'; fi
 
 # Kubectl Autocomplete
 source <(kubectl completion bash)
