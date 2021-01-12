@@ -1,8 +1,10 @@
 #!/bin/bash
 
 mkdir -p "$SOURCE/$(dirname $1)"
-cd "$SOURCE/$(dirname $1)"
-if [[ $1 == github.com/* ]]; then
-  git clone "git@github.com:$(echo "$1" | sed 's/github.com//').git"
-fi;
+pushd "$SOURCE/$(dirname $1)"
 
+domain=$(cut -d'/' -f1 <<<$1)
+repoPath=$(cut -d'/' -f2- <<<$1)
+cloneURL="git@$domain:$repoPath.git"
+git clone $cloneURL
+popd

@@ -3,38 +3,51 @@ export SOURCE=$PROJECTS/src
 export PATH=$PATH:$SOURCE/github.com/ben-turner/dotfiles/scripts
 export EDITOR=/usr/bin/nvim
 
+zmodload zsh/mapfile
+
 unset SSH_AGENT_PID
 if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
   export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
 fi
 
-function _update_ps1() {
-  PS1="$(powerline-shell $?)"
+function powerline_precmd() {
+    PS1="$(powerline-shell --shell zsh $?)"
 }
+
+function install_powerline_precmd() {
+  for s in "${precmd_functions[@]}"; do
+    if [ "$s" = "powerline_precmd" ]; then
+      return
+    fi
+  done
+  precmd_functions+=(powerline_precmd)
+}
+
 if [ "$TERM" != "linux" ]; then
-  PROMPT_COMMAND="_update_ps1;"
+    install_powerline_precmd
 fi
 
 open() {
-  mapfile -t options < <(find $SOURCE -maxdepth 5 -not -path '*/\.+' -name "*$1*" -type d | awk '{ print length, $0 }' | sort -n -s | cut -d" " -f2-)
+  IFS=$'\n' matchingFiles=($(find $SOURCE -maxdepth 5 -not -path '*/\.+' -name "*$1*" -type d | awk '{ print length, $0 }' | sort -n -s | cut -d" " -f2-))
 
-  if [[ ${#options[@]} -eq 0 ]]
+  if [[ ${#matchingFiles[@]} -eq 0 ]]
   then
     echo "No matches found"
     return 1
   fi
-  if [[ ${#options[@]} -gt 1 ]]
+  if [[ ${#matchingFiles[@]} -gt 1 ]]
   then
     echo "Multiple matches found. Choose one:"
-    select opt in "${options[@]}"
+    select opt in "${matchingFiles[@]}"
     do
-      options=$opt
+      matchingFile=$opt
       break
     done
   else
-    options=${options[0]}
+    matchingFile=${matchingFiles[1]}
   fi
-  cd "$options"
+  echo $matchingFile
+  cd "$matchingFile"
 }
 
 edit() {
@@ -69,5 +82,3 @@ alias vim='nvim'
 alias vi='nvim'
 alias v='nvim'
 
-# Kubectl Autocomplete
-source <(kubectl completion bash)
