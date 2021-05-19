@@ -59,7 +59,7 @@ let g:airline_powerline_fonts=1
 let NERDTreeShowLineNumbers=1
 let NERDTreeQuitOnOpen=1
 let NERDTreeAutoDeleteBuffer=1
-let g:hardtime_default_on=1
+let g:hardtime_default_on=0
 let g:hardtime_maxcount=2
 let g:ale_sign_error='>'
 let g:ale_fixers= {
@@ -76,14 +76,14 @@ nnoremap <C-h> <Esc>:bp<Enter>
 nnoremap <C-l> <Esc>:bn<Enter>
 nnoremap <leader>bd :BD<cr>
 nnoremap <leader>ga :Gwrite<cr>
-nnoremap <leader>gc :Gcommit -v -q<cr>
-nnoremap <leader>gb :Gblame<cr>
+nnoremap <leader>gc :Git commit -v -q<cr>
+nnoremap <leader>gb :Git blame<cr>
 nnoremap <leader>gd :Gdiff<cr>
 nnoremap <leader>gs :Gstatus<cr>
 nnoremap <leader>gbr :Git branch<space>
 nnoremap <leader>gco :Git checkout<space>
-nnoremap <leader>gp :Gpush<cr>
-nnoremap <leader>gl :Gpull<cr>
+nnoremap <leader>gp :Git push<cr>
+nnoremap <leader>gl :Git pull<cr>
 nnoremap <leader>gh :Gbrowse<cr>
 nnoremap <leader>h :HardTimeToggle<cr>
 nnoremap <leader>n :NERDTreeToggle<cr>
