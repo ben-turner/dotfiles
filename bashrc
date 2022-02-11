@@ -1,7 +1,13 @@
 export PROJECTS=$HOME/Projects/
+export GOPATH=$PROJECTS
+export GOROOT="$(brew --prefix golang)/libexec"
+export GO111MODULE=on
 export SOURCE=$PROJECTS/src
-export PATH=$PATH:$SOURCE/github.com/ben-turner/dotfiles/scripts
-export EDITOR=/usr/bin/nvim
+export PATH=$PATH:$SOURCE/github.com/ben-turner/dotfiles/scripts:$PROJECTS/bin:$GOROOT/bin
+export EDITOR=/usr/local/bin/nvim
+export GPG_TTY=$(tty)
+
+source ~/.gittoken
 
 zmodload zsh/mapfile
 
